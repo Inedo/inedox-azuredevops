@@ -11,11 +11,8 @@ using Inedo.Web;
 
 namespace Inedo.Extensions.AzureDevOps.Operations
 {
-    [DisplayName("Download Azure DevOps Artifact")]
-    [Description("Downloads a build artifact from Azure DevOps.")]
     [ScriptAlias("Download-Artifact")]
-    [Tag("artifacts")]
-    [Tag("azure-devops")]
+    [Description("Downloads a build artifact from Azure DevOps.")]
     [Serializable]
     public sealed class DownloadAzureDevOpsArtifactOperation : RemoteAzureDevOpsOperation
     {

@@ -8,9 +8,7 @@ using Inedo.Web;
 
 namespace Inedo.Extensions.AzureDevOps.Operations
 {
-    [DisplayName("Create Azure DevOps Work Item")]
     [Description("Creates a work item in Azure DevOps.")]
-    [Tag("issue-tracking")]
     [ScriptAlias("Create-WorkItem")]
     [Example(@"
 # create issue for the HDARS project

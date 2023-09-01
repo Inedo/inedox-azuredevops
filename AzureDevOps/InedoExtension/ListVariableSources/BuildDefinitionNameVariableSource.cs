@@ -31,7 +31,7 @@ namespace Inedo.Extensions.AzureDevOps.ListVariableSources
 
         public override async Task<IEnumerable<string>> EnumerateListValuesAsync(VariableTemplateContext context)
         {
-            var resource = SecureResource.TryCreate(this.ResourceName, new ResourceResolutionContext(context.ProjectId)) as AzureDevOpsRepository;
+            var resource = SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ProjectId)) as AzureDevOpsRepository;
             if (resource == null || resource?.GetCredentials(new CredentialResolutionContext(context.ProjectId, null)) is not AzureDevOpsAccount credential)
                 return Enumerable.Empty<string>();
 
@@ -43,7 +43,7 @@ namespace Inedo.Extensions.AzureDevOps.ListVariableSources
 
         public override ISimpleControl CreateRenderer(RuntimeValue value, VariableTemplateContext context)
         {
-            if (SecureResource.TryCreate(this.ResourceName, new ResourceResolutionContext(context.ProjectId)) is not AzureDevOpsRepository resource)
+            if (SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ProjectId)) is not AzureDevOpsRepository resource)
                 return new LiteralHtml(value.AsString());
 
             if (resource.GetCredentials(new CredentialResolutionContext(context.ProjectId, null)) is not AzureDevOpsAccount credential)

@@ -100,8 +100,16 @@ namespace Inedo.Extensions.AzureDevOps.Client
         public string? Id { get; set; }
         public string? Name { get; set; }
         public string? Path { get; set; }
-    }
+        public AdoIterationAttributes? Attributes { get; set; }
+        public bool IsClosed => this.Attributes?.TimeFrame == "past";
 
+    }
+    internal sealed class AdoIterationAttributes
+    {
+        public string? FinishDate { get; set; }
+        public string? StartDate { get; set; }
+        public string? TimeFrame { get; set; }
+    }
     internal sealed class AdoWorkItemQueryResult
     {
         public AdoFieldRef[]? Columns { get; set; }

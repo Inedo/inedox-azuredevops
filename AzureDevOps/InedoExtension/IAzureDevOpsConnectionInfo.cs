@@ -38,7 +38,7 @@ namespace Inedo.Extensions.AzureDevOps
             }
             else
             {
-                resource = (AzureDevOpsRepository)SecureResource.TryCreate(operation.ResourceName, context);
+                resource = (AzureDevOpsRepository)SecureResource.TryCreate(SecureResourceType.GitRepository, operation.ResourceName, context);
                 if (resource == null)
                     credentials = null;
                 else

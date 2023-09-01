@@ -9,9 +9,7 @@ using Inedo.Web;
 
 namespace Inedo.Extensions.AzureDevOps.Operations
 {
-    [DisplayName("Update Azure DevOps Work Item")]
     [Description("Updates an existing work item in Azure DevOps.")]
-    [Tag("issue-tracking")]
     [ScriptAlias("Update-WorkItem")]
     [Example(@"
 # Update issue stored in package variable to 'In Progress'

@@ -5,9 +5,9 @@ using Inedo.Extensibility.VariableFunctions;
 
 namespace Inedo.Extensions.AzureDevOps.VariableFunctions
 {
+    [Undisclosed]
     [ScriptAlias("AzureDevOpsDefaultServerName")]
-    [Description("The name of the server to connect to when browsing from the web UI; otherwise a local agent is used.")]
-    [Tag("azure-devops")]
+    [Description("[obsolete] The name of the server to connect to when browsing from the web UI; otherwise a local agent is used.")]
     [ExtensionConfigurationVariable(Required = false)]
     public sealed class AzureDevOpsDefaultServerNameVariableFunction : ScalarVariableFunction
     {

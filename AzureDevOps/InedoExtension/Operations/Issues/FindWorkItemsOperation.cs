@@ -11,9 +11,7 @@ using Inedo.Web;
 
 namespace Inedo.Extensions.AzureDevOps.Operations.Issues
 {
-    [DisplayName("Find Azure DevOps Work Items")]
     [Description("Finds Work Items in Azure DevOps.")]
-    [Tag("issue-tracking")]
     [ScriptAlias("Find-WorkItems")]
     public class FindWorkItemsOperation : AzureDevOpsOperation
     {

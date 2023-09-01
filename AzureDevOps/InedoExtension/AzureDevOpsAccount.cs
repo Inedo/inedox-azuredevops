@@ -2,6 +2,7 @@
 using System.Security;
 using Inedo.Documentation;
 using Inedo.Extensibility.Git;
+using Inedo.Extensibility.IssueTrackers;
 using Inedo.Serialization;
 using Inedo.Web;
 
@@ -10,7 +11,7 @@ namespace Inedo.Extensions.AzureDevOps
     [DisplayName("Azure DevOps Account")]
     [Description("Use an Azure DevOps account to connect to Azure DevOps resources")]
     [PersistFrom("Inedo.Extensions.AzureDevOps.Credentials.AzureDevOpsSecureCredentials,AzureDevOps")]
-    public sealed class AzureDevOpsAccount : GitServiceCredentials<AzureDevOpsServiceInfo>
+    public sealed class AzureDevOpsAccount : GitServiceCredentials<AzureDevOpsServiceInfo>, IIssueTrackerServiceCredentials
     {
         [Required]
         [Persistent]

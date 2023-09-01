@@ -11,11 +11,8 @@ using Inedo.Web;
 
 namespace Inedo.Extensions.AzureDevOps.Operations
 {
-    [DisplayName("Import Azure DevOps Artifact")]
-    [Description("Downloads an artifact from Azure DevOps and saves it to the artifact library.")]
+    [Description("Downloads an artifact from Azure DevOps and attaches to the BuildMaster build as an artifact.")]
     [ScriptAlias("Import-Artifact")]
-    [Tag("artifacts")]
-    [Tag("azure-devops")]
     public sealed class ImportAzureDevOpsArtifactOperation : AzureDevOpsOperation
     {
         [Required]

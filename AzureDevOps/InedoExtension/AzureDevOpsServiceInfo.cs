@@ -16,19 +16,19 @@ namespace Inedo.Extensions.AzureDevOps
         public override string ApiUrlDisplayName => "Instance URL";
         public override string NamespaceDisplayName => "Project";
 
-        public override async IAsyncEnumerable<string> GetNamespacesAsync(GitServiceCredentials credentials, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        protected override async IAsyncEnumerable<string> GetNamespacesAsync(AzureDevOpsAccount credentials, [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             ArgumentNullException.ThrowIfNull(credentials);
 
-            var client = new AzureDevOpsClient(credentials);
+            var client = new AzureDevOpsClient(credentials, this);
             await foreach (var proj in client.GetProjectsAsync(cancellationToken).ConfigureAwait(false))
                 yield return proj.Name;
         }
-        public override async IAsyncEnumerable<string> GetRepositoryNamesAsync(GitServiceCredentials credentials, string serviceNamespace, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        protected override async IAsyncEnumerable<string> GetRepositoryNamesAsync(AzureDevOpsAccount credentials, string serviceNamespace, [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             ArgumentNullException.ThrowIfNull(credentials);
 
-            var client = new AzureDevOpsClient(credentials);
+            var client = new AzureDevOpsClient(credentials, this);
             await foreach (var repo in client.GetRepositoriesAsync(serviceNamespace, cancellationToken).ConfigureAwait(false))
                 yield return repo.Name;
         }

@@ -29,7 +29,7 @@ namespace Inedo.Extensions.AzureDevOps.SuggestionProviders
 
             var resourceName = config[nameof(IAzureDevOpsConfiguration.ResourceName)];
             if (!string.IsNullOrEmpty(resourceName))
-                this.Resource = SecureResource.TryCreate(resourceName, context) as AzureDevOpsRepository;
+                this.Resource = SecureResource.TryCreate(SecureResourceType.GitRepository, resourceName, context) as AzureDevOpsRepository;
 
             if (this.Credentials == null && this.Resource != null)
                 this.Credentials = this.Resource.GetCredentials(context) as AzureDevOpsAccount;

@@ -10,11 +10,8 @@ using Inedo.Web;
 
 namespace Inedo.Extensions.AzureDevOps.Operations
 {
-    [DisplayName("Queue Azure DevOps Build")]
     [Description("Queues a build in Azure DevOps, optionally waiting for its completion.")]
     [ScriptAlias("Queue-Build")]
-    [Tag("builds")]
-    [Tag("azure-devops")]
     public sealed class QueueAzureDevOpsBuildOperation : AzureDevOpsOperation
     {
         [Required]

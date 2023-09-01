@@ -45,7 +45,7 @@ namespace Inedo.Extensions.AzureDevOps.IssueSources
 
         public override async IAsyncEnumerable<IIssueTrackerIssue> EnumerateIssuesAsync(IIssueSourceEnumerationContext context, [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
-            var resource = SecureResource.TryCreate(this.ResourceName, new ResourceResolutionContext(context.ProjectId)) as AzureDevOpsRepository;
+            var resource = SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ProjectId)) as AzureDevOpsRepository;
             var credentials = resource?.GetCredentials(new CredentialResolutionContext(context.ProjectId, null)) as AzureDevOpsAccount;
             if (resource == null)
                 throw new InvalidOperationException("A resource must be supplied to enumerate AzureDevOps issues.");
