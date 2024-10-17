@@ -2,9 +2,7 @@
 
 [![Build status](https://buildmaster.inedo.com/api/ci-badges/image?API_Key=badges&$ApplicationName=AzureDevOps)](https://buildmaster.inedo.com/api/ci-badges/link?API_Key=badges&$ApplicationName=AzureDevOps)
 
-This repository has code for four Git extensions that enable BuildMaster and/or Otter to interact with AzureDevOps:
-
-## Azure DevOps Extension
+This repository has code for an extension that enables BuildMaster and/or Otter to interact with AzureDevOps:
 
  - Issue (work item) synchronization (BuildMaster only)
  - Creating work items
