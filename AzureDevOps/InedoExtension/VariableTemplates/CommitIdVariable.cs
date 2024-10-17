@@ -31,7 +31,7 @@ namespace Inedo.Extensions.AzureDevOps.VariableTemplates
 
         public override ISimpleControl CreateRenderer(RuntimeValue value, VariableTemplateContext context)
         {
-            if (SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ProjectId)) is not AzureDevOpsRepository resource || !Uri.TryCreate(resource.LegacyInstanceUrl.TrimEnd('/'), UriKind.Absolute, out _))
+            if (SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ApplicationId)) is not AzureDevOpsRepository resource || !Uri.TryCreate(resource.LegacyInstanceUrl.TrimEnd('/'), UriKind.Absolute, out _))
                 return new LiteralHtml(value.AsString());
             
             return new A($"{resource.LegacyInstanceUrl.TrimEnd('/')}/{resource.ProjectName}/_git/{AH.CoalesceString(this.RepositoryName, resource.RepositoryName)}/commit/{value.AsString()}", value.AsString())
