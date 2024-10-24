@@ -36,8 +36,8 @@ namespace Inedo.Extensions.AzureDevOps.ListVariableSources
 
         public override async Task<IEnumerable<string>> EnumerateListValuesAsync(VariableTemplateContext context)
         {
-            var resource = SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ProjectId)) as AzureDevOpsRepository;
-            if (resource == null || resource?.GetCredentials(new CredentialResolutionContext(context.ProjectId, null)) is not AzureDevOpsAccount credential)
+            var resource = SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ApplicationId)) as AzureDevOpsRepository;
+            if (resource == null || resource?.GetCredentials(new CredentialResolutionContext(context.ApplicationId, null)) is not AzureDevOpsAccount credential)
                 return Enumerable.Empty<string>();
 
             var projectName = AH.CoalesceString(this.ProjectName, resource.ProjectName);
@@ -49,10 +49,10 @@ namespace Inedo.Extensions.AzureDevOps.ListVariableSources
 
         public override ISimpleControl CreateRenderer(RuntimeValue value, VariableTemplateContext context)
         {
-            if (SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ProjectId)) is not AzureDevOpsRepository resource)
+            if (SecureResource.TryCreate(SecureResourceType.GitRepository, this.ResourceName, new ResourceResolutionContext(context.ApplicationId)) is not AzureDevOpsRepository resource)
                 return new LiteralHtml(value.AsString());
 
-            if (resource.GetCredentials(new CredentialResolutionContext(context.ProjectId, null)) is not AzureDevOpsAccount credential)
+            if (resource.GetCredentials(new CredentialResolutionContext(context.ApplicationId, null)) is not AzureDevOpsAccount credential)
                 return new LiteralHtml(value.AsString());
 
             var url = AH.CoalesceString(resource.LegacyInstanceUrl, credential.ServiceUrl);
