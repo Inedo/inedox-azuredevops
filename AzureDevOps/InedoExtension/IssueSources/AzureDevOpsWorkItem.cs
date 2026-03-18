@@ -1,7 +1,8 @@
-﻿#nullable enable
-using Inedo.Extensibility.IssueSources;
+﻿using Inedo.Extensibility.IssueSources;
 using Inedo.Extensibility.IssueTrackers;
 using Inedo.Extensions.AzureDevOps.Client;
+
+#nullable enable
 
 namespace Inedo.Extensions.AzureDevOps.IssueSources;
 
@@ -10,13 +11,17 @@ internal sealed class AzureDevOpsWorkItem : IIssueTrackerIssue
     public AzureDevOpsWorkItem(AdoWorkItem w, HashSet<string> closedStates)
     {
         this.Id = w.Id.ToString();
-        this.Title = w.Fields.GetValueOrDefault("System.Title")?.ToString();
-        this.Description = w.Fields.GetValueOrDefault("System.Description")?.ToString();
-        this.Status = w.Fields.GetValueOrDefault("System.State")?.ToString();
+        if (w.Fields is not null)
+        {
+            this.Title = w.Fields.GetValueOrDefault("System.Title")?.ToString();
+            this.Description = w.Fields.GetValueOrDefault("System.Description")?.ToString();
+            this.Status = w.Fields.GetValueOrDefault("System.State")?.ToString();
+            this.SubmittedDate = AH.ParseDate(w.Fields.GetValueOrDefault("System.CreatedDate")?.ToString()!) ?? DateTime.MinValue;
+            this.Submitter = w.Fields.GetValueOrDefault("System.CreatedBy")?.ToString();
+            this.Type = w.Fields.GetValueOrDefault("System.WorkItemType")?.ToString();
+        }
+
         this.IsClosed = closedStates.Contains(this.Status, StringComparer.OrdinalIgnoreCase);
-        this.SubmittedDate = AH.ParseDate(w.Fields.GetValueOrDefault("System.CreatedDate")?.ToString()!) ?? DateTime.MinValue;
-        this.Submitter = w.Fields.GetValueOrDefault("System.CreatedBy")?.ToString();
-        this.Type = w.Fields.GetValueOrDefault("System.WorkItemType")?.ToString();
         this.Url = w.Links?.Html?.Href;
     }
 
